@@ -2,6 +2,8 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import authRouter from "./routes/auth.routes.js";
 import songRouter from "./routes/song.routes.js";
+import historyRouter from "./routes/history.routes.js";
+import favoriteRouter from "./routes/favorite.routes.js";
 
 const app = express();
 
@@ -11,5 +13,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRouter);
 app.use("/api/songs", songRouter);
+app.use("/api/history", historyRouter);
+app.use("/api/favorites", favoriteRouter);
 
 export default app;

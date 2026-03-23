@@ -21,15 +21,12 @@ export async function uploadSong(req, res) {
       }),
     ]);
 
-    console.log(tags);
-
     const song = await songModel.create({
       url: songFile.url,
       title: tags.title,
       artist: tags.artist,
       album: tags.album,
-      year: tags.year,
-      genre: tags.genre,
+      year: tags.year || tags.recordingTime,
       thumbnail: thumbnail.url,
       mood,
     });
@@ -43,6 +40,27 @@ export async function uploadSong(req, res) {
     return res.status(500).json({
       success: false,
       message: "Failed to upload song",
+      error: error.message,
+    });
+  }
+}
+
+export async function getSongs(req, res) {
+  try {
+    const { mood } = req.query;
+    const songs = await songModel.aggregate([
+      { $match: { mood } },
+      { $sample: { size: 20 } },
+    ]);
+    return res.status(200).json({
+      success: true,
+      message: "Songs fetched successfully",
+      songs,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch songs",
       error: error.message,
     });
   }
