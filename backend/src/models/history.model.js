@@ -12,6 +12,11 @@ const historySchema = new mongoose.Schema(
       ref: "songs",
       required: true,
     },
+    mood: {
+      type: String,
+      enum: ["happy", "sad", "surprised", "neutral"],
+      required: true,
+    },
   },
   { timestamps: true },
 );
