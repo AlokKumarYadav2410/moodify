@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Default Dark Theme (Purple/Blue base) */
+  --bg-color: #0f0c29;
+  --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  --sidebar-bg: rgba(0, 0, 0, 0.4);
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --accent-color: #8e2de2;
+  --accent-secondary: #4a00e0;
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --transition: all 0.3s ease;
+
+  /* Mood Colors */
+  --mood-happy: #ff9a9e; /* Pinkish-orange */
+  --mood-sad: #a1c4fd; /* Light blue */
+  --mood-neutral: #84fab0; /* Light green */
+  --mood-surprised: #8e2de2; /* Purple */
+
+  --mood-color: var(--accent-color);
+}
+
+[data-theme='light'] {
+  --bg-color: #f7f9fc;
+  --bg-gradient: linear-gradient(135deg, #f7f9fc, #ffffff);
+  --sidebar-bg: rgba(255, 255, 255, 0.8);
+  --card-bg: rgba(0, 0, 0, 0.03);
+  --text-primary: #1a1a1a;
+  --text-secondary: rgba(0, 0, 0, 0.6);
+  --accent-color: #4a00e0;
+  --accent-secondary: #8e2de2;
+  --glass-border: rgba(0, 0, 0, 0.05);
+  --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+/* Mood Overrides */
+[data-mood='happy'] { 
+  --accent-color: #f6d365;
+  --accent-secondary: #fda085;
+}
+[data-mood='sad'] { 
+  --accent-color: #2b5876;
+  --accent-secondary: #4e4376;
+}
+[data-mood='neutral'] { 
+  --accent-color: #2af598;
+  --accent-secondary: #009efd;
+}
+[data-mood='surprised'] { 
+  --accent-color: #a18cd1;
+  --accent-secondary: #fbc2eb;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Outfit', 'Poppins', sans-serif;
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  transition: var(--transition);
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+}
+
+.glass-morphism {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.scroll-container {
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--glass-border);
+    border-radius: 10px;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+}
