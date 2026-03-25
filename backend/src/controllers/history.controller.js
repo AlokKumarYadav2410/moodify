@@ -33,19 +33,14 @@ export async function addHistory(req, res) {
 export async function getHistory(req, res) {
   try {
     const history = await historyModel
-      .findOne({ userId: req.user.id })
+      .find({ userId: req.user.id })
       .populate("songId")
       .sort({ createdAt: -1 });
-    if (!history) {
-      return res.status(404).json({
-        success: false,
-        message: "History not found",
-      });
-    }
+
     return res.status(200).json({
       success: true,
       message: "History fetched successfully",
-      history,
+      history: history || [],
     });
   } catch (error) {
     return res.status(500).json({

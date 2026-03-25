@@ -26,7 +26,7 @@ export async function uploadSong(req, res) {
       title: tags.title,
       artist: tags.artist,
       album: tags.album,
-      year: tags.year || tags.recordingTime,
+      year: tags.year || tags.recordingTime || "Unknown Year",
       thumbnail: thumbnail.url,
       mood,
     });
@@ -48,13 +48,22 @@ export async function uploadSong(req, res) {
 export async function getSongs(req, res) {
   try {
     const { mood } = req.query;
+
+    let query = {};
+    if (mood && mood !== "neutral") {
+      query = { mood };
+    }
+
     const songs = await songModel.aggregate([
-      { $match: { mood } },
+      { $match: query },
       { $sample: { size: 20 } },
     ]);
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
-      message: "Songs fetched successfully",
+      message:
+        mood === "neutral" || !mood
+          ? "All songs fetched successfully"
+          : "Mood-based songs fetched successfully",
       songs,
     });
   } catch (error) {

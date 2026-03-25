@@ -38,6 +38,7 @@ export async function toggleFavorite(req, res) {
       return res.status(200).json({
         success: true,
         message: "Favorite removed successfully",
+        isFavorite: false,
       });
     }
 
@@ -48,6 +49,7 @@ export async function toggleFavorite(req, res) {
     return res.status(201).json({
       success: true,
       message: "Favorite added successfully",
+      isFavorite: true,
       favorite,
     });
   } catch (error) {
