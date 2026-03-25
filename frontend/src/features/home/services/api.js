@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api = new axios.create({
+const api = axios.create({
   baseURL: "http://localhost:3000/api",
   withCredentials: true,
   headers: {
@@ -44,7 +44,7 @@ export const favoriteApi = {
   },
 
   toggleFavorite: async (songId) => {
-    const response = await api.post("/favorites", { songId });
+    const response = await api.post(`/favorites/${songId}`);
     return response.data;
   },
 };

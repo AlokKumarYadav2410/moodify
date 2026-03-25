@@ -16,13 +16,13 @@ export const ThemeContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (moodTheme) {
-      document.documentElement.setAttribute("data-theme", moodTheme);
+      document.documentElement.setAttribute("data-mood", moodTheme);
     } else {
-      document.documentElement.removeAttribute("data-theme");
+      document.documentElement.removeAttribute("data-mood");
     }
   }, [moodTheme]);
 
-  const toggleTheme = () => {
+  const themeToggle = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
@@ -36,7 +36,7 @@ export const ThemeContextProvider = ({ children }) => {
 
   return (
     <ThemeContext.Provider
-      value={{ theme, moodTheme, toggleTheme, applyMoodTheme, clearMoodTheme }}
+      value={{ theme, moodTheme, themeToggle, applyMoodTheme, clearMoodTheme }}
     >
       {children}
     </ThemeContext.Provider>
