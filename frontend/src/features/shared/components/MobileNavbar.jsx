@@ -16,7 +16,7 @@ import "./MobileNavbar.scss";
 
 const MobileNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
+  const { theme, themeToggle } = useTheme();
   const { handleLogout } = useAuth();
 
   const menuItems = [
@@ -30,7 +30,7 @@ const MobileNavbar = () => {
       <div className="nav-header">
         <span className="logo">Moodify</span>
         <div className="nav-actions">
-          <button onClick={toggleTheme} className="icon-btn">
+          <button onClick={themeToggle} className="icon-btn">
             {theme === "dark" ? <FaSun /> : <FaMoon />}
           </button>
           <button onClick={() => setIsOpen(!isOpen)} className="icon-btn">

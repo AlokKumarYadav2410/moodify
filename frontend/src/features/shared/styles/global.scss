@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap");
 
 :root {
   /* Default Dark Theme (Purple/Blue base) */
@@ -23,7 +23,7 @@
   --mood-color: var(--accent-color);
 }
 
-[data-theme='light'] {
+[data-theme="light"] {
   --bg-color: #f7f9fc;
   --bg-gradient: linear-gradient(135deg, #f7f9fc, #ffffff);
   --sidebar-bg: rgba(255, 255, 255, 0.8);
@@ -37,19 +37,19 @@
 }
 
 /* Mood Overrides */
-[data-mood='happy'] { 
+[data-mood="happy"] {
   --accent-color: #f6d365;
   --accent-secondary: #fda085;
 }
-[data-mood='sad'] { 
+[data-mood="sad"] {
   --accent-color: #2b5876;
   --accent-secondary: #4e4376;
 }
-[data-mood='neutral'] { 
+[data-mood="neutral"] {
   --accent-color: #2af598;
   --accent-secondary: #009efd;
 }
-[data-mood='surprised'] { 
+[data-mood="surprised"] {
   --accent-color: #a18cd1;
   --accent-secondary: #fbc2eb;
 }
@@ -61,7 +61,7 @@
 }
 
 body {
-  font-family: 'Outfit', 'Poppins', sans-serif;
+  font-family: "Outfit", "Poppins", sans-serif;
   background: var(--bg-gradient);
   background-attachment: fixed;
   color: var(--text-primary);

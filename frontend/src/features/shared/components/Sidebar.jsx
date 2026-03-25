@@ -1,26 +1,32 @@
-import React from "react";
-import { useTheme } from "../theme.context";
-import { useAuth } from "../../auth/hooks/useAuth";
+import { NavLink } from "react-router-dom";
 import {
-  FaChevronLeft,
-  FaChevronRight,
+  FaHome,
   FaHeart,
   FaHistory,
-  FaHome,
-  FaMoon,
   FaSignOutAlt,
+  FaChevronLeft,
+  FaChevronRight,
   FaSun,
+  FaMoon,
 } from "react-icons/fa";
+import { useTheme } from "../theme.context";
+import { useAuth } from "../../auth/hooks/useAuth";
 import "./Sidebar.scss";
-import { NavLink } from "react-router-dom";
 
 const Sidebar = ({ isCollapsed, toggleSidebar }) => {
-  const { theme, toggleTheme } = useTheme();
-  const { handleLogout } = useAuth();
+  const { theme, themeToggle } = useTheme();
+  const { user, handleLogout } = useAuth();
+
+  const greet = [
+    "Good Morning",
+    "Good Afternoon",
+    "Good Evening",
+    "Good Night",
+  ];
 
   const menuItems = [
     { path: "/", icon: <FaHome />, label: "Home" },
-    { path: "/favorite", icon: <FaHeart />, label: "Favourites" },
+    { path: "/favorites", icon: <FaHeart />, label: "Favourites" },
     { path: "/history", icon: <FaHistory />, label: "History" },
   ];
 
@@ -33,7 +39,6 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
           <span className="logo-icon">🎧</span>
           {!isCollapsed && <span className="logo-text">Moodify</span>}
         </div>
-
         <button className="collapse-btn" onClick={toggleSidebar}>
           {isCollapsed ? <FaChevronRight /> : <FaChevronLeft />}
         </button>
@@ -44,8 +49,7 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
           <NavLink
             key={item.path}
             to={item.path}
-            className="nav-item"
-            activeClassName="active"
+            className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
           >
             <span className="icon">{item.icon}</span>
             {!isCollapsed && <span className="label">{item.label}</span>}
@@ -53,8 +57,19 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
         ))}
       </nav>
 
+      <h1>
+        {isCollapsed ? (
+          <span className="user-name">{user?.username || "User"}</span>
+        ) : (
+          <div>
+            {greet[Math.floor(new Date().getHours() / 6)]},{" "}
+            <span className="user-name">{user?.username || "User"}</span>
+          </div>
+        )}
+      </h1>
+
       <div className="sidebar-footer">
-        <button className="theme-toggle" onClick={toggleTheme}>
+        <button className="theme-toggle" onClick={themeToggle}>
           <span className="icon">
             {theme === "dark" ? <FaSun /> : <FaMoon />}
           </span>
