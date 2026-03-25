@@ -20,6 +20,12 @@ const Login = () => {
       toast.error("Please fill all the fields");
       return;
     }
+
+    if(formData.password.length < 6){
+      toast.error("Password must be at least 6 characters long");
+      return;
+    }
+
     const { success, message } = await handleLogin(formData);
     if (success) {
       toast.success(message);

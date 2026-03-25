@@ -1,6 +1,6 @@
-import React, { memo, useEffect, useRef, useState } from "react";
-import { useTheme } from "../../shared/theme.context";
+import React, { useEffect, useRef, useState, memo } from "react";
 import { detect, init } from "../utils/utils";
+import { useTheme } from "../../shared/theme.context";
 import "./FaceExpression.scss";
 
 const FaceExpression = memo(({ onClick = () => {} }) => {
@@ -9,7 +9,7 @@ const FaceExpression = memo(({ onClick = () => {} }) => {
   const streamRef = useRef(null);
   const { applyMoodTheme } = useTheme();
 
-  const [expression, setExpression] = useState("netural");
+  const [expression, setExpression] = useState("neutral");
 
   useEffect(() => {
     init({ landmarkerRef, videoRef, streamRef });
@@ -43,7 +43,25 @@ const FaceExpression = memo(({ onClick = () => {} }) => {
       </div>
       <div className="expression-info">
         <span className="current-mood">
-          Mood: <span className={`mood-text ${expression}`}>{expression}</span>
+          Mood:{" "}
+          <span className={`mood-text ${expression}`}>
+            {expression}{" "}
+            {expression === "neutral"
+              ? "😐"
+              : expression === "happy"
+                ? "😊"
+                : expression === "sad"
+                  ? "😔"
+                  : expression === "angry"
+                    ? "😠"
+                    : expression === "surprised"
+                      ? "😮"
+                      : expression === "disgusted"
+                        ? "🤢"
+                        : expression === "fearful"
+                          ? "😨"
+                          : ""}
+          </span>
         </span>
         <button className="detect-btn" onClick={handleClick}>
           Detect Mood
