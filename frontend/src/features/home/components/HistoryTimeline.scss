@@ -1,0 +1,98 @@
+.history-timeline {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 100%;
+
+  .timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    .live-indicator {
+      font-size: 0.8rem;
+      color: #ff9f43;
+      font-weight: 700;
+    }
+  }
+
+  .timeline-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .timeline-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 420px;
+
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 15px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      transition: var(--transition);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .mood-indicator {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+
+      .mood-emoji {
+        font-size: 1.2rem;
+      }
+
+      .mood-name {
+        flex: 1;
+        font-weight: 500;
+        font-size: 0.95rem;
+      }
+
+      .mood-time {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+      }
+
+      /* Mood-based Colors */
+      &.mood-happy {
+        border-left: 4px solid #f6d365;
+        .mood-indicator { background: #f6d365; }
+        .mood-name { color: #f6d365; }
+      }
+      &.mood-sad {
+        border-left: 4px solid #2b5876;
+        .mood-indicator { background: #2b5876; }
+        .mood-name { color: #2b5876; }
+      }
+      &.mood-neutral {
+        border-left: 4px solid #2af598;
+        .mood-indicator { background: #2af598; }
+        .mood-name { color: #2af598; }
+      }
+      &.mood-surprised {
+        border-left: 4px solid #a18cd1;
+        .mood-indicator { background: #a18cd1; }
+        .mood-name { color: #a18cd1; }
+      }
+    }
+  }
+
+  .no-data {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 20px;
+  }
+}
