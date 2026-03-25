@@ -1,0 +1,131 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 1400px;
+  width: 100%;
+
+  .home-header {
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      .user-name {
+        color: var(--accent-color);
+      }
+    }
+  }
+
+  .home-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+    gap: 30px;
+
+    .grid-item {
+      height: 100%;
+    }
+
+    .song-recommendations {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .section-header {
+        h3 {
+          font-size: 1.2rem;
+          font-weight: 600;
+          margin-bottom: 8px;
+        }
+      }
+
+      .search-bar {
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        input {
+          flex: 1;
+          background: none;
+          border: none;
+          color: white;
+          outline: none;
+          font-size: 0.9rem;
+          font-family: var(--font-family);
+          &::placeholder {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+          }
+        }
+      }
+
+      .recommendation-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 5px;
+        max-height: 400px;
+        overflow-y: auto;
+
+        .placeholder-text {
+          color: var(--text-secondary);
+          font-style: italic;
+          text-align: center;
+          padding: 20px;
+        }
+
+        .rec-item {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          padding: 10px;
+          border-radius: 12px;
+          cursor: pointer;
+          transition: var(--transition);
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+          }
+
+          img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+          }
+
+          .rec-info {
+            h4 {
+              font-size: 0.95rem;
+              font-weight: 600;
+              margin-bottom: 2px;
+            }
+            p {
+              font-size: 0.8rem;
+              color: var(--text-secondary);
+              text-transform: capitalize;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  .home-grid {
+    grid-template-columns: 1fr !important;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    .home-header h1 {
+      font-size: 2rem;
+    }
+  }
+}
