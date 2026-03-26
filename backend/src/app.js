@@ -23,13 +23,16 @@ app.use(
         defaultSrc: ["'self'"],
         imgSrc: ["'self'", "data:", "https://ik.imagekit.io"],
         mediaSrc: ["'self'", "https://ik.imagekit.io"],
-        scriptSrc: ["'self'", "https://cdn.jsdelivr.net"],
-        connectSrc: ["'self'", "https://ik.imagekit.io"],
+        scriptSrc: ["'self'", "https://cdn.jsdelivr.net", "'unsafe-eval'"],
+        connectSrc: [
+          "'self'",
+          "https://ik.imagekit.io",
+          "https://cdn.jsdelivr.net",
+        ],
       },
     },
   }),
 );
-
 app.use(compression());
 
 app.use(express.json({ limit: "16kb" }));
