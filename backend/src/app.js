@@ -16,7 +16,20 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 // Security and Performance Middleware
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        imgSrc: ["'self'", "data:", "https://ik.imagekit.io"],
+        mediaSrc: ["'self'", "https://ik.imagekit.io"],
+        scriptSrc: ["'self'", "https://cdn.jsdelivr.net"],
+        connectSrc: ["'self'", "https://ik.imagekit.io"],
+      },
+    },
+  }),
+);
+
 app.use(compression());
 
 app.use(express.json({ limit: "16kb" }));
