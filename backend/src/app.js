@@ -28,6 +28,7 @@ app.use(
           "'self'",
           "https://ik.imagekit.io",
           "https://cdn.jsdelivr.net",
+          "https://storage.googleapis.com",
         ],
       },
     },
