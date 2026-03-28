@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { historyApi } from "../services/api";
 import Loader from "../../shared/components/Loader";
 import "./History.scss";
+import Modal from "../../shared/components/Modal";
 
 const History = () => {
   const [historyGroups, setHistoryGroups] = useState({});
   const [loading, setLoading] = useState(true);
+  const [isClearModalOpen, setIsClearModalOpen] = useState(false);
 
   const fetchHistory = async () => {
     try {
@@ -42,12 +44,11 @@ const History = () => {
     }
   };
 
-  const clearAll = async () => {
-    if (!window.confirm("Are you sure you want to clear your entire history?"))
-      return;
+  const handleClearAll = async () => {
     try {
       await historyApi.clearHistory();
       setHistoryGroups({});
+      setIsClearModalOpen(false);
     } catch (error) {
       console.error(error);
     }
@@ -65,11 +66,39 @@ const History = () => {
           <p>Relive your musical moods</p>
         </div>
         {Object.keys(historyGroups).length > 0 && (
-          <button className="clear-btn" onClick={clearAll}>
+          <button
+            className="clear-btn"
+            onClick={() => setIsClearModalOpen(true)}
+          >
             Clear History
           </button>
         )}
       </header>
+
+      <Modal
+        isOpen={isClearModalOpen}
+        onClose={() => setIsClearModalOpen(false)}
+        title="Clear History"
+        size="small"
+        footer={
+          <>
+            <button
+              className="secondary"
+              onClick={() => setIsClearModalOpen(false)}
+            >
+              Cancel
+            </button>
+            <button className="primary" onClick={handleClearAll}>
+              Yes, Clear All
+            </button>
+          </>
+        }
+      >
+        <p>
+          This action will permanently delete all your mood history. Are you
+          sure you want to proceed?
+        </p>
+      </Modal>
 
       <div className="history-container">
         {Object.keys(historyGroups).length === 0 ? (
@@ -89,7 +118,9 @@ const History = () => {
                     <div className="item-main">
                       <div className="item-cover">
                         <img
-                          src={item.songId?.thumbnail || "/placeholder-song.png"}
+                          src={
+                            item.songId?.thumbnail || "/placeholder-song.png"
+                          }
                           alt={item.songId?.title || "Unknown Song"}
                         />
                       </div>
